@@ -1,0 +1,112 @@
+/*
+Author: Caleb Okrzesik
+Date: 11/5/2025
+Purpose: Style for responsive Sudoku game with lavender/light purple gradient and dark gray boxes
+*/
+
+/* Wrapper & page background */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e6e6fa, #d8bfd8); /* light lavender to soft purple gradient */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.wrapper-main {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background: #333333; /* dark gray card for contrast */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* deeper shadow for depth */
+    border-radius: 12px;
+    color: #fff; /* text in card white for readability */
+}
+
+/* Title */
+h1 {
+    margin-bottom: 10px;
+    color: #f3e6ff; /* light lavender text for contrast */
+}
+
+/* Difficulty selector and button */
+select, button {
+    margin: 10px 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e6e6fa; /* soft lavender hover */
+    color: #333;
+}
+
+/* Sudoku board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 2px;
+    margin-top: 20px;
+    background-color: #444; /* dark gray background for board */
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/* Cells */
+.cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    background: #f3e6ff; /* light lavender cells */
+    border: 1px solid #bbb; /* subtle border */
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.1s;
+    color: #333; /* dark text for readability */
+}
+
+.cell:hover {
+    background: #e0cfff; /* slightly darker lavender hover */
+    transform: scale(1.05);
+}
+
+.cell.filled {
+    background-color: #b19cd9; /* lavender-ish filled cells */
+    font-weight: bold;
+    cursor: default;
+    color: #fff;
+}
+
+.cell.invalid {
+    background-color: #ffb3b3; /* invalid move highlight */
+    color: #333;
+}
+
+.cell.selected {
+    background-color: #d8bfd8; /* light purple selection */
+    border: 2px solid #9b59b6; /* deeper purple border */
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 600px){
+    .cell { width: 30px; height: 30px; font-size: 14px; }
+}
+
+@media only screen and (min-width: 601px){
+    .cell { width: 40px; height: 40px; font-size: 16px; }
+}
+
+@media only screen and (min-width: 768px){
+    .cell { width: 45px; height: 45px; font-size: 18px; }
+}
