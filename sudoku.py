@@ -7,6 +7,7 @@ def main():
     #setup
     gameBoard = [[0 for _ in range(9)] for _ in range(9)] #Setups up board with random numbers
     gameBoard = initBoard(gameBoard) #Intialize Game Board number and remove for setup
+    displayBoard(gameBoard)
     difficulty = int(input("Difficulty(1 easy, 2 medium , 3 hard): "))
     setGameDiff(gameBoard,difficulty)
 
