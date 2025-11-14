@@ -1,5 +1,5 @@
-//Author Caleb Okrzesik
-//Purpose: Weather App with responsive, bright color palette back end
+// Author: Caleb Okrzesik
+// Purpose: Weather App with responsive, bright color palette back end
 
 const API_KEY = "cdd84496d31e6a4c46b264f7db6a324f";
 
@@ -19,10 +19,14 @@ async function getWeather() {
         return;
     }
 
+    // Determine selected unit
+    const unit = document.querySelector('input[name="unit"]:checked').value;
+    const unitSymbol = unit === "metric" ? "°C" : "°F";
+
     const currentURL =
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${unit}`;
     const forecastURL =
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=${unit}`;
 
     try {
         // Current Weather
@@ -39,7 +43,7 @@ async function getWeather() {
         const humidity = data.main.humidity;
 
         currentDiv.innerText =
-            `Temperature: ${temp}°C\n` +
+            `Temperature: ${temp}${unitSymbol}\n` +
             `Condition: ${desc}\n` +
             `Humidity: ${humidity}%`;
 
@@ -66,7 +70,7 @@ async function getWeather() {
             box.className = "forecast-day";
             box.innerHTML =
                 `<strong>${d}</strong><br>` +
-                `${daily[d].temp}°C — ${daily[d].desc}`;
+                `${daily[d].temp}${unitSymbol} — ${daily[d].desc}`;
             forecastDiv.appendChild(box);
         }
 
