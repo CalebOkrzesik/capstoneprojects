@@ -14,7 +14,7 @@ Purpose: Weather App with responsive, bright color palette html front end
 
 <div class="wrapper-main">
 
-    <!-- Sudoku Game link, styled like your other portfolio links -->
+    <!-- Sudoku Game link -->
     <div class="sudoku-link-container">
         <a href="sudoku.html">Sudoku Game</a>
     </div>
@@ -30,6 +30,16 @@ Purpose: Weather App with responsive, bright color palette html front end
     <!-- City input -->
     <input id="cityInput" type="text" placeholder="Enter a city...">
 
+    <!-- Celsius / Fahrenheit toggle -->
+    <div style="margin: 10px 0;">
+        <label>
+            <input type="radio" name="unit" value="metric" checked> Celsius
+        </label>
+        <label>
+            <input type="radio" name="unit" value="imperial"> Fahrenheit
+        </label>
+    </div>
+
     <!-- Search button -->
     <button onclick="getWeather()">Get Weather</button>
 
@@ -42,7 +52,6 @@ Purpose: Weather App with responsive, bright color palette html front end
 
 </div>
 
-<!-- JS -->
 <script src="weather.js"></script>
 </body>
 </html>
