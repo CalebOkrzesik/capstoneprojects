@@ -13,25 +13,33 @@ Purpose: Weather App with responsive, bright color palette html front end
 
 <div class="wrapper-main">
 
+    <!-- Top-right link to Sudoku page -->
+    <a href="sudoku.html" class="top-right-link">Sudoku Game</a>
+
     <h1 class="title">Weather Checker</h1>
 
-    <!-- INSERTED IMAGE -->
+    <!-- Optional inserted image -->
     <img id="customImage" 
          src="https://cdn.dribbble.com/userupload/20776985/file/original-b7ee994b269a39f3f8e2bcc8567c69f7.png?resize=752x564&vertical=center" 
          alt="Weather Illustration" 
          class="custom-img">
 
+    <!-- City input -->
     <input id="cityInput" type="text" placeholder="Enter a city...">
 
+    <!-- Search button -->
     <button onclick="getWeather()">Get Weather</button>
 
+    <!-- Current weather card -->
     <div id="currentWeather" class="card"></div>
 
+    <!-- 5-Day Forecast -->
     <h2 class="sub-title">5-Day Forecast</h2>
     <div id="forecast" class="forecast-container"></div>
 
 </div>
 
+<!-- JS -->
 <script src="weather.js"></script>
 </body>
 </html>

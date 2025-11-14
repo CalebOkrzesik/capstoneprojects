@@ -1,6 +1,6 @@
 /*
 Author: Caleb Okrzesik
-Purpose: Weather App with responsive, bright color palette styel sheet
+Purpose: Weather App with responsive, bright color palette style sheet
 */
 
 /* Background gradient (light blue → very pale yellow) */
@@ -17,6 +17,7 @@ body {
 
 /* Wrapper card */
 .wrapper-main {
+    position: relative; /* needed for top-right link positioning */
     max-width: 500px;
     width: 100%;
     background: rgba(255, 255, 255, 0.85);
@@ -26,6 +27,26 @@ body {
     text-align: center;
     color: #333;
     box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+}
+
+/* Top-right link inside wrapper */
+.top-right-link {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    text-decoration: none;
+    color: #f0e68c; /* very light yellow */
+    font-weight: bold;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.top-right-link:hover {
+    background: rgba(240, 230, 140, 0.5); /* light yellow hover */
+    color: #333;
 }
 
 /* Title */
