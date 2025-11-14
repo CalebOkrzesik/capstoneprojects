@@ -19,14 +19,13 @@ async function getWeather() {
         return;
     }
 
-    // Determine selected unit
-    const unit = document.querySelector('input[name="unit"]:checked').value;
+    // Get selected unit, fallback to metric
+    const unitRadio = document.querySelector('input[name="unit"]:checked');
+    const unit = unitRadio ? unitRadio.value : "metric";
     const unitSymbol = unit === "metric" ? "°C" : "°F";
 
-    const currentURL =
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${unit}`;
-    const forecastURL =
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=${unit}`;
+    const currentURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${unit}`;
+    const forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=${unit}`;
 
     try {
         // Current Weather
