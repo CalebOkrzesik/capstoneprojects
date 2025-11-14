@@ -1,30 +1,37 @@
 <!--
 Author: Caleb Okrzesik
-Date: 11/3/2025
-Purpose: Web-based Sudoku game interface
+Purpose: Weather App with responsive, bright color palette html front end
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="wrapper-main">
-        <h1>Sudoku</h1>
-        <label for="difficulty">Difficulty:</label>
-        <select id="difficulty">
-            <option value="1">Easy</option>
-            <option value="2">Medium</option>
-            <option value="3">Hard</option>
-        </select>
-        <button id="startBtn">Start Game</button>
 
-        <div id="sudokuBoard" class="board"></div>
-    </div>
+<div class="wrapper-main">
 
-    <script src="sudoku.js"></script>
+    <h1 class="title">Weather Checker</h1>
+
+    <!-- INSERTED IMAGE -->
+    <img id="customImage" 
+         src="https://cdn.dribbble.com/userupload/20776985/file/original-b7ee994b269a39f3f8e2bcc8567c69f7.png?resize=752x564&vertical=center" 
+         alt="Weather Illustration" 
+         class="custom-img">
+
+    <input id="cityInput" type="text" placeholder="Enter a city...">
+
+    <button onclick="getWeather()">Get Weather</button>
+
+    <div id="currentWeather" class="card"></div>
+
+    <h2 class="sub-title">5-Day Forecast</h2>
+    <div id="forecast" class="forecast-container"></div>
+
+</div>
+
+<script src="weather.js"></script>
 </body>
 </html>

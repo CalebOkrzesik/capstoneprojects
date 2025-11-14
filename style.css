@@ -1,0 +1,124 @@
+/*
+Author: Caleb Okrzesik
+Purpose: Weather App with responsive, bright color palette styel sheet
+*/
+
+/* Background gradient (light blue → very pale yellow) */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #cce7ff, #fffacd);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Wrapper card */
+.wrapper-main {
+    max-width: 500px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 14px;
+    text-align: center;
+    color: #333;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+}
+
+/* Title */
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #f0e68c; /* very light yellow */
+    margin-bottom: 15px;
+}
+
+/* Optional user-inserted image */
+.custom-img {
+    width: 80%;
+    max-height: 180px;
+    object-fit: contain;
+    margin: 15px auto; /* centers image horizontally */
+    display: block;
+    border-radius: 10px;
+    border: 2px solid #f0e68c;
+}
+
+/* Input field */
+#cityInput {
+    width: 85%;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 2px solid #f0e68c;
+    outline: none;
+    margin-bottom: 15px;
+    background: white;
+    color: #333;
+}
+
+/* Button */
+button {
+    width: 60%;
+    padding: 12px;
+    background: linear-gradient(135deg, #87cefa, #00bfff);
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    background: #fffacd; /* very light yellow on hover */
+    color: #333;
+}
+
+/* Weather card */
+.card {
+    background: rgba(255,255,255,0.7);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    font-size: 18px;
+    white-space: pre-line;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    color: #333;
+}
+
+/* Section title */
+.sub-title {
+    margin-top: 30px;
+    font-size: 22px;
+    color: #f0e68c;
+}
+
+/* Forecast grid */
+.forecast-container {
+    margin-top: 15px;
+    display: grid;
+    gap: 15px;
+}
+
+/* Individual daily forecast cards */
+.forecast-day {
+    background: linear-gradient(135deg, #add8e6, #fffacd);
+    padding: 15px;
+    border-radius: 10px;
+    color: #333;
+    border-left: 4px solid #f0e68c;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    button { width: 85%; }
+    #cityInput { width: 95%; }
+    .wrapper-main { padding: 18px; }
+}
