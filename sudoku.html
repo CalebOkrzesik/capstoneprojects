@@ -21,6 +21,13 @@ Purpose: Web-based Sudoku game interface
             <option value="3">Hard</option>
         </select>
         <button id="startBtn">Start Game</button>
+        <button id="solveBtn">Solve Puzzle</button>
+
+<label for="solverType">Solve with:</label>
+<select id="solverType">
+    <option value="backtracking">Backtracking (Recommended)</option>
+    <option value="random">Random Fill (Experimental)</option>
+</select>
 
         <div id="sudokuBoard" class="board"></div>
     </div>
@@ -28,3 +35,4 @@ Purpose: Web-based Sudoku game interface
     <script src="sudoku.js"></script>
 </body>
 </html>
+
