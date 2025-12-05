@@ -1,13 +1,16 @@
 /*
 Author: Caleb Okrzesik
-Date: 11/4/2025
-Purpose: Allows user to run and play Sudoku in the browser
+Date: Updated 12/4/2025
+Purpose: Browser Sudoku game with solver selection (backtracking + random)
 */
 
 let gameBoard = [];
 let selectedCell = null;
 
-// Initialize board
+// ------------------------------------------------------------
+// INITIAL BOARD GENERATION
+// ------------------------------------------------------------
+
 function initBoard() {
     gameBoard = Array.from({ length: 9 }, () => Array(9).fill(0));
 
@@ -22,7 +25,7 @@ function initBoard() {
             if (checkIfValid(gameBoard, row, col, num)) {
                 gameBoard[row][col] = num;
                 if (fillCell(row, col + 1)) return true;
-                gameBoard[row][col] = 0; // backtrack
+                gameBoard[row][col] = 0;
             }
         }
         return false;
@@ -31,13 +34,19 @@ function initBoard() {
     fillCell(0, 0);
 }
 
-// Check if number can be placed
+// ------------------------------------------------------------
+// VALIDATION
+// ------------------------------------------------------------
+
 function checkIfValid(board, row, col, num) {
     if (board[row].includes(num)) return false;
-    for (let r = 0; r < 9; r++) if (board[r][col] === num) return false;
+
+    for (let r = 0; r < 9; r++)
+        if (board[r][col] === num) return false;
 
     let startRow = Math.floor(row / 3) * 3;
     let startCol = Math.floor(col / 3) * 3;
+
     for (let r = startRow; r < startRow + 3; r++)
         for (let c = startCol; c < startCol + 3; c++)
             if (board[r][c] === num) return false;
@@ -45,9 +54,13 @@ function checkIfValid(board, row, col, num) {
     return true;
 }
 
-// Clear cells based on difficulty
+// ------------------------------------------------------------
+// DIFFICULTY
+// ------------------------------------------------------------
+
 function setGameDiff(difficulty) {
     let numToClear;
+
     if (difficulty === 1) numToClear = 81 - (30 + Math.floor(Math.random() * 6));
     else if (difficulty === 2) numToClear = 81 - (25 + Math.floor(Math.random() * 6));
     else numToClear = 81 - (20 + Math.floor(Math.random() * 6));
@@ -63,7 +76,10 @@ function setGameDiff(difficulty) {
     }
 }
 
-// Display board on webpage
+// ------------------------------------------------------------
+// DISPLAY BOARD
+// ------------------------------------------------------------
+
 function displayBoard() {
     const boardDiv = document.getElementById("sudokuBoard");
     boardDiv.innerHTML = "";
@@ -72,57 +88,135 @@ function displayBoard() {
         for (let c = 0; c < 9; c++) {
             const cell = document.createElement("div");
             cell.classList.add("cell");
+
             if (gameBoard[r][c] !== 0) {
                 cell.textContent = gameBoard[r][c];
                 cell.classList.add("filled");
             }
+
             cell.dataset.row = r;
             cell.dataset.col = c;
 
             cell.addEventListener("click", () => selectCell(cell));
-
             boardDiv.appendChild(cell);
         }
     }
 }
 
-// Handle cell click
+// ------------------------------------------------------------
+// USER ENTRY
+// ------------------------------------------------------------
+
 function selectCell(cell) {
     if (cell.classList.contains("filled")) return;
+
     if (selectedCell) selectedCell.classList.remove("selected");
     selectedCell = cell;
     cell.classList.add("selected");
 
     let num = prompt("Enter a number (1-9):");
     num = parseInt(num);
+
     if (num >= 1 && num <= 9) {
         const row = parseInt(cell.dataset.row);
         const col = parseInt(cell.dataset.col);
+
         if (placeNumber(row, col, num)) {
             displayBoard();
-            if (isBoardComplete()) alert("Congratulations! You completed the Sudoku board!");
+            if (isBoardComplete()) alert("You completed the puzzle!");
         } else {
-            alert("Invalid move. Try again.");
+            alert("Invalid move.");
         }
     }
 }
 
-// Place number if valid
 function placeNumber(row, col, num) {
     if (!checkIfValid(gameBoard, row, col, num)) return false;
     gameBoard[row][col] = num;
     return true;
 }
 
-// Check if board is complete
 function isBoardComplete() {
     return gameBoard.every(row => row.every(cell => cell !== 0));
 }
 
-// Start game
+// ------------------------------------------------------------
+// SOLVERS (same as the Python version)
+// ------------------------------------------------------------
+
+// -------- Backtracking Solver --------
+
+function solveBacktracking(board) {
+    let empty = findEmpty(board);
+    if (!empty) return true;
+
+    let [row, col] = empty;
+
+    for (let num = 1; num <= 9; num++) {
+        if (checkIfValid(board, row, col, num)) {
+            board[row][col] = num;
+
+            if (solveBacktracking(board)) return true;
+
+            board[row][col] = 0;
+        }
+    }
+
+    return false;
+}
+
+// -------- Random Fill Solver (less reliable) --------
+
+function solveRandom(board) {
+    let empty = findEmpty(board);
+    if (!empty) return true;
+
+    let [row, col] = empty;
+    let nums = Array.from({ length: 9 }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+
+    for (let num of nums) {
+        if (checkIfValid(board, row, col, num)) {
+            board[row][col] = num;
+            if (solveRandom(board)) return true;
+            board[row][col] = 0;
+        }
+    }
+
+    return false;
+}
+
+// -------- Utility --------
+
+function findEmpty(board) {
+    for (let r = 0; r < 9; r++)
+        for (let c = 0; c < 9; c++)
+            if (board[r][c] === 0) return [r, c];
+
+    return null;
+}
+
+// ------------------------------------------------------------
+// EVENT LISTENERS
+// ------------------------------------------------------------
+
 document.getElementById("startBtn").addEventListener("click", () => {
     const difficulty = parseInt(document.getElementById("difficulty").value);
     initBoard();
     setGameDiff(difficulty);
+    displayBoard();
+});
+
+// NEW: Solve button
+document.getElementById("solveBtn").addEventListener("click", () => {
+    const solver = document.getElementById("solverType").value;
+
+    if (solver === "backtracking") {
+        solveBacktracking(gameBoard);
+        alert("Solved using Backtracking!");
+    } else {
+        solveRandom(gameBoard);
+        alert("Solved using Random Fill!");
+    }
+
     displayBoard();
 });
